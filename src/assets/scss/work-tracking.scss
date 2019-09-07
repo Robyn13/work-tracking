@@ -1,0 +1,35 @@
+@import '~bootstrap/scss/bootstrap';
+@import 'work-tracking/variables';
+@import 'work-tracking/mixins';
+
+// Plugins CSS
+@import 'work-tracking/plugins/plugin-animate-bootstrap-notify';
+@import 'work-tracking/plugins/plugin-perfect-scrollbar';
+
+// Core CSS
+@import 'work-tracking/buttons';
+@import 'work-tracking/inputs';
+@import 'work-tracking/typography';
+@import 'work-tracking/misc';
+@import 'work-tracking/checkboxes-radio';
+
+// components
+@import 'work-tracking/navbar';
+@import 'work-tracking/page-header';
+@import 'work-tracking/dropdown';
+@import 'work-tracking/alerts';
+@import 'work-tracking/images';
+@import 'work-tracking/nucleo-outline';
+@import 'work-tracking/tables';
+@import 'work-tracking/sidebar-and-main-panel';
+@import 'work-tracking/footers';
+@import 'work-tracking/fixed-plugin';
+
+// cards
+@import 'work-tracking/cards';
+@import 'work-tracking/cards/card-plain';
+@import 'work-tracking/cards/card-chart';
+@import 'work-tracking/cards/card-user';
+@import 'work-tracking/cards/card-map';
+
+@import 'work-tracking/responsive';
