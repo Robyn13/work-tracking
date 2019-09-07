@@ -2,25 +2,14 @@
 <div class="main-content">
   <div class="row" *ngFor="let directReport of directReports">
     <div class="col-md-12">
-      <div class="card ">
-        <div class="card-header ">
-          <div class="row">
-            <div class="col align-self-start">{{ directReport.name }}</div>
-            <div class="col align-self-end">
-              <a class="float-right" *ngIf="!directReport.fullView" (click)="directReport.fullView = true"
-                ><i class="fa fa-eye fa-3x btn-icon"></i>
-              </a>
-              <a class="float-right" *ngIf="directReport.fullView" (click)="directReport.fullView = false"
-                ><i class="fa fa-eye-slash fa-3x btn-icon"></i>
-              </a>
-            </div>
-          </div>
+      <summary-detail-card title="{{ directReport.name }}">
+        <div content-summary>
+          <direct-report-summary [directReport]="directReport"></direct-report-summary>
         </div>
-        <div class="card-body">
-          <direct-report-summary *ngIf="!directReport.fullView" [directReport]="directReport"></direct-report-summary>
-          <direct-report-edit *ngIf="directReport.fullView" [directReport]="directReport"></direct-report-edit>
+        <div content-details>
+          <direct-report-edit [directReport]="directReport"></direct-report-edit>
         </div>
-      </div>
+      </summary-detail-card>
     </div>
   </div>
 </div>
