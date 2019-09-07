@@ -5,11 +5,13 @@ import { DirectReportsRoutingModule } from './direct-reports-routing.module';
 import { DirectReportsComponent } from './direct-reports.component';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { DirectReportSummaryComponent } from './summary-view/summary-view.component';
+import { DirectReportEditComponent } from './edit/edit.component';
 
 const routes: Routes = [{ path: '', component: DirectReportsComponent }];
 
 @NgModule({
-  declarations: [DirectReportsComponent],
+  declarations: [DirectReportsComponent, DirectReportSummaryComponent, DirectReportEditComponent],
   imports: [FormsModule, CommonModule, DirectReportsRoutingModule, RouterModule.forChild(routes)],
   exports: [DirectReportsComponent],
 })

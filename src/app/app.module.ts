@@ -10,10 +10,12 @@ import { NavigationModule } from './navigation/navigation.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from './core/core.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     CommonModule,
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     CoreModule,

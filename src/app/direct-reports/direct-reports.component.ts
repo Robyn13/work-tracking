@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../core/services/employee.service';
-import { Employee } from '../core/models/employee.model';
 import { Subscription } from 'rxjs';
+import { DirectReport } from './direct-reports.model';
 
 @Component({
   selector: 'direct-reports',
@@ -9,13 +9,15 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./direct-reports.component.css'],
 })
 export class DirectReportsComponent implements OnInit {
-  employees: Employee[] = [];
+  directReports: DirectReport[] = [];
   subscriptions: Subscription = new Subscription();
 
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(this.employeeService.getAllEmployees().subscribe(x => (this.employees = x)));
+    this.subscriptions.add(
+      this.employeeService.getAllEmployees().subscribe(result => (this.directReports = result.map(x => new DirectReport(x))))
+    );
   }
 
   ngOnDestroy(): void {

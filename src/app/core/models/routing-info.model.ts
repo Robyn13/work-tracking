@@ -16,5 +16,5 @@ export const appRoutes: RouteConfig[] = [
     cssClass: '',
     icon: 'business_badge',
   },
-  { path: '/direct-reports', displayName: 'Upgrade to PRO', icon: 'objects_spaceship', cssClass: 'active active-bottom' },
+  { path: '/direct-reports', displayName: 'User Settings', icon: 'ui-1_settings-gear-63', cssClass: 'active active-bottom' },
 ];
