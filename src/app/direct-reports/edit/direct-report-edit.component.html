@@ -63,7 +63,7 @@
     </div>
   </div>
   <div *ngFor="let actionConfig of actionConfigs">
-    <summary-detail-card [title]="actionConfig.summaryDescription" [small]="true">
+    <summary-detail-card [title]="directReport.name + ' - ' + actionConfig.summaryDescription" [small]="true">
       <div content-summary>
         <action-list-summary
           [actionType]="actionConfig.detailDescription"
@@ -84,7 +84,7 @@
   </div>
 
   <div *ngFor="let noteConfig of noteConfigs">
-    <summary-detail-card [title]="noteConfig.summaryDescription" [small]="true">
+    <summary-detail-card [title]="directReport.name + ' - ' + noteConfig.summaryDescription" [small]="true">
       <div content-summary>
         <notes-list-summary
           [noteType]="noteConfig.detailDescription"
@@ -105,7 +105,7 @@
   </div>
 
   <div *ngFor="let infoConfig of infoConfigs">
-    <summary-detail-card [title]="infoConfig.summaryDescription" [small]="true">
+    <summary-detail-card [title]="directReport.name + ' - ' + infoConfig.summaryDescription" [small]="true">
       <div content-summary>
         <info-list-summary
           [infoType]="infoConfig.detailDescription"
