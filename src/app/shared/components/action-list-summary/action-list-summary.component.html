@@ -5,13 +5,13 @@
         >Next {{ actionType }} Due:</span
       >
     </div>
-    {{ nextActionDate | date: 'shortDate' }}
+    {{ nextActionDate | date: 'shortDate' | dashesWhenNull }}
   </div>
   <div class="col-3">
     <div>
       <span style="font-weight: bold">Last Completed {{ actionType }}:</span>
     </div>
-    {{ lastActionDate | date: 'shortDate' }}
+    {{ lastActionDate | date: 'shortDate' | dashesWhenNull }}
   </div>
   <div class="col-3">
     <div>

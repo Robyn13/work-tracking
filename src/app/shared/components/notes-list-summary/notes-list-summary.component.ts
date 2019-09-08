@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Note, NoteType } from '../../../core/models/note.model';
-import { InfoType } from 'src/app/core/models/info.model';
 
 @Component({
   selector: 'notes-list-summary',
@@ -29,15 +28,38 @@ export class NotesListSummaryComponent {
   }
 
   get lastNoteDate() {
-    if (this.totalNotes === 0) {
-      return null;
-    }
-
-    return this.noteList
+    const lastNote = this.noteList
       .filter(x => x.date)
       .sort((a, b) => {
         return b.date.valueOf() - a.date.valueOf();
       })
-      .shift().date;
+      .shift();
+
+    if (lastNote) {
+      return lastNote.date;
+    }
+    return null;
+  }
+
+  get isNextNoteOverdue() {
+    if (!this.requiredCadence) {
+      return false;
+    }
+    const lastNoteDate = this.lastNoteDate;
+    if (!this.lastNoteDate) {
+      return true;
+    }
+    return new Date(lastNoteDate).valueOf() + this.requiredCadence * 24 * 60 * 60 * 1000 < new Date().valueOf();
+  }
+
+  get isNextNoteDueInTheNextWeek() {
+    if (!this.requiredCadence) {
+      return false;
+    }
+    const lastNoteDate = this.lastNoteDate;
+    if (!this.lastNoteDate) {
+      return false;
+    }
+    return new Date(lastNoteDate).valueOf() + (this.requiredCadence - 7) * 24 * 60 * 60 * 1000 < new Date().valueOf();
   }
 }

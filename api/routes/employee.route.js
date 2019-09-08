@@ -11,7 +11,7 @@ employeeRoutes.route("/add").post(function(req, res) {
   employee
     .save()
     .then(employee => {
-      res.status(200).json({ employee: "employee is added successfully" });
+      res.status(200).json(employee);
     })
     .catch(err => {
       res.status(400).send("unable to save to database");
@@ -39,17 +39,27 @@ employeeRoutes.route("/edit/:id").get(function(req, res) {
 
 //  Defined update route
 employeeRoutes.route("/update/:id").post(function(req, res) {
-  Employee.findById(req.params.id, function(err, next, employee) {
-    if (!employee) return next(new Error("Could not load Document"));
-    else {
+  Employee.findById(req.params.id, function(err, employee) {
+    if (!employee) {
+      res.status(400).send("unable to find employee");
+      return;
+    } else {
       employee.name = req.body.name;
       employee.title = req.body.title;
+      employee.startDate = req.body.startDate;
+      employee.reportsTo = req.body.reportsTo;
+      employee.desiredCoachingCadence = req.body.desiredCoachingCadence;
+      employee.commuteTime = req.body.commuteTime;
+      employee.currentClient = req.body.currentClient;
+      employee.currentAddress = req.body.currentAddress;
       employee.goals = req.body.goals;
+      employee.info = req.body.info;
+      employee.actionItems = req.body.actionItems;
 
       employee
         .save()
         .then(employee => {
-          res.json("Update complete");
+          res.json(employee);
         })
         .catch(err => {
           res.status(400).send("unable to update the database");

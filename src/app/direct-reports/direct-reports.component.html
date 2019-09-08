@@ -1,13 +1,14 @@
 <div class="panel-header panel-header-sm"></div>
+<button style="position: absolute; margin-top: -110px" class="btn btn-info pl-3" (click)="addDirectReport()">Add New Direct Report</button>
 <div class="main-content">
   <div class="row" *ngFor="let directReport of directReports">
     <div class="col-md-12">
-      <summary-detail-card title="{{ directReport.name }}">
+      <summary-detail-card [collapsed]="!directReport.fullView" title="{{ directReport.name }}">
         <div content-summary>
           <direct-report-summary [directReport]="directReport"></direct-report-summary>
         </div>
         <div content-details>
-          <direct-report-edit [directReport]="directReport"></direct-report-edit>
+          <direct-report-edit [directReport]="directReport" (saveChangesEvent)="saveDirectReport($event)"></direct-report-edit>
         </div>
       </summary-detail-card>
     </div>

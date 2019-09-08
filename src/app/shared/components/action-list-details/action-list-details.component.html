@@ -2,7 +2,7 @@
   <table class="table">
     <thead class="text-primary">
       <th>
-        <div class="non-btn-action non-btn-primary"><i class="fa fa-plus"></i> Add New {{ actionType }}</div>
+        <div class="non-btn-action non-btn-primary" (click)="addNewAction()"><i class="fa fa-plus"></i> Add New {{ actionType }}</div>
       </th>
       <th>{{ actionType }}</th>
       <th>Due Date</th>
@@ -13,25 +13,65 @@
     <tbody>
       <tr *ngFor="let action of actionList">
         <td>
-          <div *ngIf="!action.completed" class="non-btn-action non-btn-danger pb-1">
+          <div *ngIf="!action.completed" class="non-btn-action non-btn-danger pb-1" (click)="deleteAction(action)">
             <i class="fa fa-minus"> Delete {{ actionType }}</i>
           </div>
-          <div *ngIf="!action.completed && !action.abandoned" class="non-btn-action non-btn-warning pb-1">
+          <div
+            *ngIf="!action.completed && !action.abandoned"
+            class="non-btn-action non-btn-warning pb-1"
+            (click)="setActionAbandoned(action, true)"
+          >
             <i class="fa fa-ban"> Abandon {{ actionType }}</i>
           </div>
-          <div *ngIf="!action.completed && action.abandoned" class="non-btn-action non-btn-primary">
+          <div
+            *ngIf="!action.completed && action.abandoned"
+            class="non-btn-action non-btn-primary pb-1"
+            (click)="setActionAbandoned(action, false)"
+          >
             <i class="fa fa-undo"> Undo Abandon {{ actionType }}</i>
           </div>
+          <div *ngIf="!action.completed && !action.abandoned" class="non-btn-action non-btn-success">
+            <i class="fa fa-floppy-o"> Save Changes</i>
+          </div>
         </td>
-        <td [ngClass]="{ abandoned: action.abandoned }">{{ action.description }}</td>
-        <td [ngClass]="{ abandoned: action.abandoned }">{{ action.date | date: 'shortDate' }}</td>
-        <td [ngClass]="{ abandoned: action.abandoned }">{{ action.createdOn | date: 'shortDate' }}</td>
+        <td [ngClass]="{ abandoned: action.abandoned }">
+          <span *ngIf="action.abandoned || action.completed">{{ action.description }}</span>
+          <input
+            *ngIf="!action.abandoned && !action.completed"
+            type="text"
+            class="form-control"
+            name="description"
+            [(ngModel)]="action.description"
+          />
+        </td>
+        <td [ngClass]="{ abandoned: action.abandoned }">
+          <span *ngIf="action.abandoned || action.completed">{{ action.date | date: 'shortDate' }}</span>
+          <input
+            *ngIf="!action.abandoned && !action.completed"
+            type="date"
+            class="form-control"
+            name="dueDAte"
+            [value]="getFormattedDate(action.date)"
+            (change)="action.date = getUpdatedDate($event)"
+          />
+        </td>
+        <td [ngClass]="{ abandoned: action.abandoned }">
+          {{ action.createdOn | date: 'shortDate' }}
+        </td>
         <td [ngClass]="{ abandoned: action.abandoned }">
           {{ action.completed ? 'Yes' : 'No' }}
-          <div *ngIf="!action.abandoned && !action.completed" class="non-btn-action non-btn-success">
+          <div
+            *ngIf="!action.abandoned && !action.completed"
+            class="non-btn-action non-btn-success"
+            (click)="setActionCompleted(action, true)"
+          >
             <i class="fa fa-check"> Mark Completed</i>
           </div>
-          <div *ngIf="!action.abandoned && action.completed" class="non-btn-action non-btn-primary">
+          <div
+            *ngIf="!action.abandoned && action.completed"
+            class="non-btn-action non-btn-primary"
+            (click)="setActionCompleted(action, false)"
+          >
             <i class="fa fa-undo"> Undo Mark Completed</i>
           </div>
         </td>

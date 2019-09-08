@@ -49,7 +49,7 @@ export class ActionListSummaryComponent {
       }
       return false;
     }
-    return nextActiveAction <= new Date();
+    return new Date(nextActiveAction) <= new Date();
   }
 
   get nextActionIsInTheNextWeek() {
@@ -57,7 +57,7 @@ export class ActionListSummaryComponent {
     if (!nextActiveAction) {
       return false;
     }
-    return nextActiveAction <= new Date(new Date().valueOf() + 7 * 24 * 60 * 60 * 1000);
+    return new Date(nextActiveAction) <= new Date(new Date().valueOf() + 7 * 24 * 60 * 60 * 1000);
   }
 
   get lastActionDate() {

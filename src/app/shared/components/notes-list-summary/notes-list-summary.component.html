@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-3">
     <div>
-      <span style="font-weight: bold">Last {{ noteType }} Date:</span>
+      <span [ngClass]="{ 'text-danger': isNextNoteOverdue, 'text-warning': isNextNoteDueInTheNextWeek }" style="font-weight: bold"
+        >Last {{ noteType }} Date:</span
+      >
     </div>
     {{ lastNoteDate | date: 'shortDate' }}
   </div>

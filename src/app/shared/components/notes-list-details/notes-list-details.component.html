@@ -1,6 +1,6 @@
 <div class="row pb-3">
   <div class="col-md-3 pl-1">
-    <div class="non-btn-action non-btn-success pb-1">
+    <div class="non-btn-action non-btn-success pb-1" (click)="addNewNote()">
       <i class="fa fa-plus"> Add New {{ noteType }} </i>
     </div>
   </div>
@@ -10,7 +10,7 @@
   <div class="row">
     <hr width="100%" />
     <div class="col-md-3 pl-1">
-      <div class="non-btn-action non-btn-danger pb-3">
+      <div class="non-btn-action non-btn-danger pb-3" (click)="deleteNote(note)">
         <i class="fa fa-minus"> Delete {{ noteType }} </i>
       </div>
       <div class="non-btn-action non-btn-success pb-1">
@@ -32,13 +32,7 @@
     <div class="col-md-3 pl-1">
       <div class="form-group">
         <label>Created On</label>
-        <input
-          type="date"
-          class="form-control"
-          name="createdOn"
-          [value]="getFormattedDate(note.date)"
-          (change)="note.dreatedOn = getUpdatedDate($event)"
-        />
+        <input type="date" class="form-control" name="createdOn" [value]="getFormattedDate(note.createdOn)" disabled />
       </div>
     </div>
   </div>

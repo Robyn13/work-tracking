@@ -14,7 +14,20 @@ export interface Action {
   abandoned: boolean;
   completedOn?: Date;
 }
-export const actionConfigs: SummaryDetailConfig[] = [
-  { summaryDescription: 'Career Path Goals', detailDescription: 'Goal', filterType: ActionType.Goal },
-  { summaryDescription: 'Committed Actions', detailDescription: 'Commitment', filterType: ActionType.Commitment },
+
+export class ActionConfig implements SummaryDetailConfig {
+  summaryDescription: string;
+  detailDescription: string;
+  filterType: string;
+  noNextActionIsError: boolean;
+}
+
+export const actionConfigs: ActionConfig[] = [
+  { summaryDescription: 'Career Path Goals', detailDescription: 'Goal', filterType: ActionType.Goal, noNextActionIsError: true },
+  {
+    summaryDescription: 'Committed Actions',
+    detailDescription: 'Commitment',
+    filterType: ActionType.Commitment,
+    noNextActionIsError: false,
+  },
 ];

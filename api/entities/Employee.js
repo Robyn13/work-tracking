@@ -11,8 +11,32 @@ let Employee = new Schema(
     title: {
       type: String
     },
-    goals: {
-      type: []
+    startDate: {
+      type: Date
+    },
+    reportsTo: {
+      type: String
+    },
+    desiredCoachingCadence: {
+      type: String
+    },
+    commuteTime: {
+      type: Number
+    },
+    currentClient: {
+      type: String
+    },
+    currentAddress: {
+      type: String
+    },
+    notes: {
+      type: Array
+    },
+    extraInfo: {
+      type: Array
+    },
+    actionItems: {
+      type: Array
     }
   },
   {

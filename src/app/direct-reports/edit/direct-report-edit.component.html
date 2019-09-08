@@ -41,7 +41,7 @@
     <div class="col-md-3 px-1">
       <div class="form-group">
         <label>Daily Commute (minutes)</label>
-        <input name="currentClinet" name="driveTime" type="number" class="form-control" [(ngModel)]="directReport.driveTime" />
+        <input name="currentClinet" name="driveTime" type="number" class="form-control" [(ngModel)]="directReport.commuteTime" />
       </div>
     </div>
   </div>
@@ -55,8 +55,11 @@
     <div class="col-md-3 pl-1">
       <div class="form-group">
         <label>Desired 1:1 Cadence</label>
-        <input type="test" class="form-control" name="desiredCadence" [(ngModel)]="directReport.desiredCadence" />
+        <input type="test" class="form-control" name="desiredCadence" [(ngModel)]="directReport.desiredCoachingCadence" />
       </div>
+    </div>
+    <div class="col-md-6 pl-1">
+      <button class="btn btn-info pull-right" (click)="saveAllChanges()">Save All Changes</button>
     </div>
   </div>
   <div *ngFor="let actionConfig of actionConfigs">
@@ -65,14 +68,15 @@
         <action-list-summary
           [actionType]="actionConfig.detailDescription"
           [actionTypeFilter]="actionConfig.filterType"
-          [actionList]="goals"
+          [actionList]="directReport.actionItems"
+          [noNextActionIsError]="actionConfig.noNextActionIsError"
         ></action-list-summary>
       </div>
       <div content-details>
         <action-list-details
           [actionType]="actionConfig.detailDescription"
           [actionTypeFilter]="actionConfig.filterType"
-          [actionList]="goals"
+          [actionList]="directReport.actionItems"
         ></action-list-details>
       </div>
     </summary-detail-card>
@@ -84,15 +88,15 @@
         <notes-list-summary
           [noteType]="noteConfig.detailDescription"
           [noteTypeFilter]="noteConfig.filterType"
-          [noteList]="notes"
-          [requiredCadence]="90"
+          [noteList]="directReport.notes"
+          [requiredCadence]="noteConfig.minimumRequiredCadence"
         ></notes-list-summary>
       </div>
       <div content-details>
         <notes-list-details
           [noteType]="noteConfig.detailDescription"
           [noteTypeFilter]="noteConfig.filterType"
-          [noteList]="notes"
+          [noteList]="directReport.notes"
         ></notes-list-details>
       </div>
     </summary-detail-card>
@@ -101,14 +105,18 @@
   <div *ngFor="let infoConfig of infoConfigs">
     <summary-detail-card [title]="infoConfig.summaryDescription" [small]="true">
       <div content-summary>
-        <info-list-summary [infoType]="infoConfig.detailDescription" [infoTypeFilter]="infoConfig.filterType" [infoList]="info">
+        <info-list-summary
+          [infoType]="infoConfig.detailDescription"
+          [infoTypeFilter]="infoConfig.filterType"
+          [infoList]="directReport.extraInfo"
+        >
         </info-list-summary>
       </div>
       <div content-details>
         <info-list-details
           [infoType]="infoConfig.detailDescription"
           [infoTypeFilter]="infoConfig.filterType"
-          [infoList]="info"
+          [infoList]="directReport.extraInfo"
         ></info-list-details>
       </div>
     </summary-detail-card>
