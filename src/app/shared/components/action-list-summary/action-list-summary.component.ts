@@ -1,48 +1,76 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Action } from '../../../core/models/action.model';
+import { createHostListener } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'action-list-summary',
   templateUrl: './action-list-summary.component.html',
 })
 export class ActionListSummaryComponent {
-  @Input() actionType: string;
   @Input() set actionList(value: Action[]) {
     this._actionList = value;
-    this.setSummaryValues();
   }
+  @Input() actionType: string;
+  @Input() actionTypeFilter: string;
+  @Input() noNextActionIsError: boolean;
 
   private _actionList: Action[];
 
-  public lastActionDate: Date;
-  public nextActionDate: Date;
-  public totalUpcomingActions: number = 0;
-  public totalCompletedActions: number = 0;
-
   constructor() {}
 
-  private setSummaryValues() {
+  get actionList() {
     if (!this._actionList) {
-      this.lastActionDate = null;
-      this.nextActionDate = null;
-      this.totalCompletedActions = 0;
-      this.totalUpcomingActions = 0;
-    } else {
-      this.setCompletedActionInfo();
-      this.setUpcomingActionInfo();
+      return [];
     }
+    return this._actionList.filter(x => x.type === this.actionTypeFilter);
   }
 
-  private setCompletedActionInfo(): void {
-    const completedAction = this._actionList.filter(x => x.completed);
-    this.totalCompletedActions = completedAction.length;
-    this.lastActionDate = this.getTopActionDate(completedAction, true);
+  get completedActionList() {
+    return this.actionList.filter(x => x.completed);
   }
 
-  private setUpcomingActionInfo(): void {
-    const incompletedActions = this._actionList.filter(x => !x.completed);
-    this.totalUpcomingActions = incompletedActions.length;
-    this.nextActionDate = this.getTopActionDate(incompletedActions, false);
+  get upComingActionList() {
+    return this.actionList.filter(x => !x.completed);
+  }
+
+  get totalCompletedActions() {
+    return this.completedActionList.length;
+  }
+
+  get totalUpComingActions() {
+    return this.upComingActionList.length;
+  }
+
+  get nextActionDateIsBehind() {
+    const nextActiveAction = this.getNextActiveAction();
+    if (!nextActiveAction) {
+      if (this.noNextActionIsError) {
+        return true;
+      }
+      return false;
+    }
+    return nextActiveAction <= new Date();
+  }
+
+  get nextActionIsInTheNextWeek() {
+    const nextActiveAction = this.getNextActiveAction();
+    if (!nextActiveAction) {
+      return false;
+    }
+    return nextActiveAction <= new Date(new Date().valueOf() + 7 * 24 * 60 * 60 * 1000);
+  }
+
+  get lastActionDate() {
+    return this.getTopActionDate(this.completedActionList, true);
+  }
+
+  get nextActionDate() {
+    return this.getTopActionDate(this.upComingActionList, false);
+  }
+
+  private getNextActiveAction() {
+    const incompletedActiveActions = this.actionList.filter(x => !x.completed);
+    return this.getTopActionDate(incompletedActiveActions, false);
   }
 
   private getTopActionDate(actionList: Action[], sortOrderAsc: boolean): Date {
@@ -50,7 +78,10 @@ export class ActionListSummaryComponent {
       return null;
     }
 
-    const ordredList = actionList.filter(x => x.date).sort((a, b) => (sortOrderAsc ? -1 : 1) * (a.date.valueOf() - b.date.valueOf()));
+    const ordredList = actionList
+      .filter(x => !x.abandoned)
+      .filter(x => x.date)
+      .sort((a, b) => (sortOrderAsc ? -1 : 1) * (a.date.valueOf() - b.date.valueOf()));
 
     if (ordredList.length === 0) {
       return null;

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Action } from '../../../core/models/action.model';
+import { Action, ActionType } from '../../../core/models/action.model';
 
 @Component({
   selector: 'action-list-details',
@@ -11,6 +11,7 @@ export class ActionListDetailsComponent {
     this._actionList = values;
   }
   @Input() actionType: string;
+  @Input() actionTypeFilter: ActionType;
 
   private _actionList: Action[];
 
@@ -20,21 +21,24 @@ export class ActionListDetailsComponent {
     if (!this._actionList) {
       return [];
     }
-    return this._actionList.sort((a, b) => {
-      if (a.completed && !b.completed) {
-        return 1;
-      }
-      if (!a.completed && b.completed) {
-        return -1;
-      }
-      if (a.completed) {
-        return this.sortDates(a.date, b.date, false);
-      }
-      if (!a.completed) {
-        return this.sortDates(a.date, b.date, true);
-      }
-      return 0;
-    });
+    const finalLIst = this._actionList
+      .filter(x => x.type === this.actionTypeFilter)
+      .sort((a, b) => {
+        if (a.completed && !b.completed) {
+          return 1;
+        }
+        if (!a.completed && b.completed) {
+          return -1;
+        }
+        if (a.completed) {
+          return this.sortDates(a.date, b.date, false);
+        }
+        if (!a.completed) {
+          return this.sortDates(a.date, b.date, true);
+        }
+        return 0;
+      });
+    return finalLIst;
   }
   private sortDates(a: Date, b: Date, asc: boolean) {
     if (!a || !b) {

@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-3">
     <div>
-      <span style="font-weight: bold">Next {{ actionType }} Due:</span>
+      <span [ngClass]="{ 'text-danger': nextActionDateIsBehind, 'text-warning': nextActionIsInTheNextWeek }" style="font-weight: bold"
+        >Next {{ actionType }} Due:</span
+      >
     </div>
     {{ nextActionDate | date: 'shortDate' }}
   </div>
@@ -15,7 +17,7 @@
     <div>
       <span style="font-weight: bold">Total Upcoming {{ actionType }}(s):</span>
     </div>
-    {{ totalUpcomingActions }}
+    {{ totalUpComingActions }}
   </div>
   <div class="col-3">
     <div>

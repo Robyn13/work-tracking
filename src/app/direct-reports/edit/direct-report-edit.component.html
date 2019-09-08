@@ -15,7 +15,13 @@
     <div class="col-md-3 px-1">
       <div class="form-group">
         <label>Start Date</label>
-        <input type="date" class="form-control" name="startDate" [(ngModel)]="directReport.startDate" />
+        <input
+          type="date"
+          class="form-control"
+          name="startDate"
+          [value]="getFormattedDate(directReport.startDate)"
+          (change)="directReport.startDate = getUpdatedDate($event)"
+        />
       </div>
     </div>
   </div>
@@ -53,28 +59,58 @@
       </div>
     </div>
   </div>
-  <summary-detail-card title="Career Path Goals" [small]="true">
-    <div content-summary>
-      <action-list-summary actionType="Goal" [actionList]="goals()"></action-list-summary>
-    </div>
-    <div content-details>
-      <action-list-details actionType="Goal" [actionList]="goals()"></action-list-details>
-    </div>
-  </summary-detail-card>
-  <summary-detail-card title="Committed Actions" [small]="true">
-    <div content-summary>
-      <action-list-summary actionType="Commitment" [actionList]="goals()"></action-list-summary>
-    </div>
-    <div content-details>
-      <action-list-details actionType="Commitment" [actionList]="goals()"></action-list-details>
-    </div>
-  </summary-detail-card>
-  <summary-detail-card title="1:1 Meetings" [small]="true">
-    <div content-summary>
-      <notes-list-summary noteType="1:1" [noteList]="notes()" [requiredCadence]="90"></notes-list-summary>
-    </div>
-    <div content-details>
-      <notes-list-details noteType="1:1" [noteList]="notes()"></notes-list-details>
-    </div>
-  </summary-detail-card>
+  <div *ngFor="let actionConfig of actionConfigs">
+    <summary-detail-card [title]="actionConfig.summaryDescription" [small]="true">
+      <div content-summary>
+        <action-list-summary
+          [actionType]="actionConfig.detailDescription"
+          [actionTypeFilter]="actionConfig.filterType"
+          [actionList]="goals"
+        ></action-list-summary>
+      </div>
+      <div content-details>
+        <action-list-details
+          [actionType]="actionConfig.detailDescription"
+          [actionTypeFilter]="actionConfig.filterType"
+          [actionList]="goals"
+        ></action-list-details>
+      </div>
+    </summary-detail-card>
+  </div>
+
+  <div *ngFor="let noteConfig of noteConfigs">
+    <summary-detail-card [title]="noteConfig.summaryDescription" [small]="true">
+      <div content-summary>
+        <notes-list-summary
+          [noteType]="noteConfig.detailDescription"
+          [noteTypeFilter]="noteConfig.filterType"
+          [noteList]="notes"
+          [requiredCadence]="90"
+        ></notes-list-summary>
+      </div>
+      <div content-details>
+        <notes-list-details
+          [noteType]="noteConfig.detailDescription"
+          [noteTypeFilter]="noteConfig.filterType"
+          [noteList]="notes"
+        ></notes-list-details>
+      </div>
+    </summary-detail-card>
+  </div>
+
+  <div *ngFor="let infoConfig of infoConfigs">
+    <summary-detail-card [title]="infoConfig.summaryDescription" [small]="true">
+      <div content-summary>
+        <info-list-summary [infoType]="infoConfig.detailDescription" [infoTypeFilter]="infoConfig.filterType" [infoList]="info">
+        </info-list-summary>
+      </div>
+      <div content-details>
+        <info-list-details
+          [infoType]="infoConfig.detailDescription"
+          [infoTypeFilter]="infoConfig.filterType"
+          [infoList]="info"
+        ></info-list-details>
+      </div>
+    </summary-detail-card>
+  </div>
 </form>

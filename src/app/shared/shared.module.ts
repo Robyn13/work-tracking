@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashesWhenNullPipe } from './pipes/dashes-when-null.pipe';
 import { NotesListDetailsComponent } from './components/notes-list-details/notes-list-details.component';
 import { NotesListSummaryComponent } from './components/notes-list-summary/notes-list-summary.component';
+import { InfoListDetailsComponent } from './components/info-list-details/info-list-details.component';
+import { InfoListSummaryComponent } from './components/info-list-summary/info-list-summary.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { NotesListSummaryComponent } from './components/notes-list-summary/notes
     DashesWhenNullPipe,
     NotesListDetailsComponent,
     NotesListSummaryComponent,
+    InfoListDetailsComponent,
+    InfoListSummaryComponent,
   ],
   imports: [CommonModule, FormsModule, NgbModule],
   exports: [
@@ -28,6 +32,8 @@ import { NotesListSummaryComponent } from './components/notes-list-summary/notes
     DashesWhenNullPipe,
     NotesListDetailsComponent,
     NotesListSummaryComponent,
+    InfoListDetailsComponent,
+    InfoListSummaryComponent,
   ],
   providers: [],
 })

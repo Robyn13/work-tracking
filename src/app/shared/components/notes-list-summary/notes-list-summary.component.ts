@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Note } from '../../../core/models/note.model';
+import { Note, NoteType } from '../../../core/models/note.model';
+import { InfoType } from 'src/app/core/models/info.model';
 
 @Component({
   selector: 'notes-list-summary',
@@ -8,29 +9,35 @@ import { Note } from '../../../core/models/note.model';
 export class NotesListSummaryComponent {
   @Input() set noteList(value: Note[]) {
     this._noteList = value;
-    this.setSummaryNoteInfo();
   }
   @Input() noteType: string;
+  @Input() noteTypeFilter: NoteType;
   @Input() requiredCadence: number;
 
   private _noteList: Note[];
-
-  lastNoteDate: Date;
-  totalNotes: number = 0;
   constructor() {}
 
-  private setSummaryNoteInfo() {
-    if (!this._noteList && this._noteList.length > 0) {
-      this.totalNotes = 0;
-      this.lastNoteDate = null;
-    } else {
-      this.totalNotes = this._noteList.length;
-      this.lastNoteDate = this._noteList
-        .filter(x => x.date)
-        .sort((a, b) => {
-          return b.date.valueOf() - a.date.valueOf();
-        })
-        .shift().date;
+  get noteList() {
+    if (!this._noteList) {
+      return [];
     }
+    return this._noteList.filter(x => x.type === this.noteTypeFilter);
+  }
+
+  get totalNotes() {
+    return this.noteList.length;
+  }
+
+  get lastNoteDate() {
+    if (this.totalNotes === 0) {
+      return null;
+    }
+
+    return this.noteList
+      .filter(x => x.date)
+      .sort((a, b) => {
+        return b.date.valueOf() - a.date.valueOf();
+      })
+      .shift().date;
   }
 }

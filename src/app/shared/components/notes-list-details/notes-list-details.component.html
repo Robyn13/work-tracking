@@ -1,11 +1,12 @@
-<form>
-  <div class="row pb-3">
-    <div class="col-md-3 pl-1">
-      <div class="non-btn-action non-btn-success pb-1">
-        <i class="fa fa-plus"> Add New {{ noteType }} </i>
-      </div>
+<div class="row pb-3">
+  <div class="col-md-3 pl-1">
+    <div class="non-btn-action non-btn-success pb-1">
+      <i class="fa fa-plus"> Add New {{ noteType }} </i>
     </div>
   </div>
+</div>
+
+<div *ngFor="let note of noteList">
   <div class="row">
     <hr width="100%" />
     <div class="col-md-3 pl-1">
@@ -19,13 +20,25 @@
     <div class="col-md-3 pl-1">
       <div class="form-group">
         <label>{{ noteType }} Date</label>
-        <input type="date" class="form-control" name="date" [(ngModel)]="note.date" />
+        <input
+          type="date"
+          class="form-control"
+          name="date"
+          [value]="getFormattedDate(note.date)"
+          (change)="note.date = getUpdatedDate($event)"
+        />
       </div>
     </div>
     <div class="col-md-3 pl-1">
       <div class="form-group">
         <label>Created On</label>
-        <input type="date" class="form-control" name="createdOn" [(ngModel)]="note.createdOn" />
+        <input
+          type="date"
+          class="form-control"
+          name="createdOn"
+          [value]="getFormattedDate(note.date)"
+          (change)="note.dreatedOn = getUpdatedDate($event)"
+        />
       </div>
     </div>
   </div>
@@ -33,8 +46,8 @@
     <div class="col-md-12">
       <div class="form-group">
         <label>{{ noteType }} Notes</label>
-        <textarea rows="4" cols="80" class="form-control" name="note" [(ngModel)]="note.note"></textarea>
+        <textarea rows="6" cols="80" class="form-control" name="note" [(ngModel)]="note.note"></textarea>
       </div>
     </div>
   </div>
-</form>
+</div>

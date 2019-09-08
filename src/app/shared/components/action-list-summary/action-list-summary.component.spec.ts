@@ -61,7 +61,7 @@ describe('ActionListSummaryComponent', () => {
     component.actionList = defaultActions;
 
     expect(component.totalCompletedActions).toBe(2);
-    expect(component.totalUpcomingActions).toBe(5);
+    expect(component.totalUpComingActions).toBe(5);
   });
 
   it('setting action list of null sets action dates to null and total count to zero', () => {
@@ -69,7 +69,7 @@ describe('ActionListSummaryComponent', () => {
 
     expect(component.nextActionDate).toBeNull();
     expect(component.lastActionDate).toBeNull();
-    expect(component.totalUpcomingActions).toBe(0);
+    expect(component.totalUpComingActions).toBe(0);
     expect(component.totalCompletedActions).toBe(0);
   });
 
@@ -78,7 +78,7 @@ describe('ActionListSummaryComponent', () => {
 
     expect(component.nextActionDate).toBeNull();
     expect(component.lastActionDate).toBeNull();
-    expect(component.totalUpcomingActions).toBe(0);
+    expect(component.totalUpComingActions).toBe(0);
     expect(component.totalCompletedActions).toBe(0);
   });
 });

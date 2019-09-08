@@ -10,7 +10,7 @@
       <th>Completed?</th>
       <th>Completed on</th>
     </thead>
-    <tbody *ngIf="actionList">
+    <tbody>
       <tr *ngFor="let action of actionList">
         <td>
           <div *ngIf="!action.completed" class="non-btn-action non-btn-danger pb-1">
