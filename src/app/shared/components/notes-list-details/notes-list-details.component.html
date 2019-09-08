@@ -1,0 +1,40 @@
+<form>
+  <div class="row pb-3">
+    <div class="col-md-3 pl-1">
+      <div class="non-btn-action non-btn-success pb-1">
+        <i class="fa fa-plus"> Add New {{ noteType }} </i>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <hr width="100%" />
+    <div class="col-md-3 pl-1">
+      <div class="non-btn-action non-btn-danger pb-3">
+        <i class="fa fa-minus"> Delete {{ noteType }} </i>
+      </div>
+      <div class="non-btn-action non-btn-success pb-1">
+        <i class="fa fa-floppy-o"> Save Changes</i>
+      </div>
+    </div>
+    <div class="col-md-3 pl-1">
+      <div class="form-group">
+        <label>{{ noteType }} Date</label>
+        <input type="date" class="form-control" name="date" [(ngModel)]="note.date" />
+      </div>
+    </div>
+    <div class="col-md-3 pl-1">
+      <div class="form-group">
+        <label>Created On</label>
+        <input type="date" class="form-control" name="createdOn" [(ngModel)]="note.createdOn" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>{{ noteType }} Notes</label>
+        <textarea rows="4" cols="80" class="form-control" name="note" [(ngModel)]="note.note"></textarea>
+      </div>
+    </div>
+  </div>
+</form>

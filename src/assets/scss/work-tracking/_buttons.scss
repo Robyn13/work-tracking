@@ -187,7 +187,22 @@
   }
 }
 
-.btn-icon {
-  color: $info-color;
+.non-btn-action {
   cursor: pointer;
+}
+
+.non-btn-primary {
+  color: $info-color;
+}
+
+.non-btn-success {
+  color: $success-color;
+}
+
+.non-btn-warning {
+  color: $warning-color;
+}
+
+.non-btn-danger {
+  color: $danger-color;
 }

@@ -53,15 +53,28 @@
       </div>
     </div>
   </div>
-  <summary-detail-card title="Goals" [small]="true">
+  <summary-detail-card title="Career Path Goals" [small]="true">
+    <div content-summary>
+      <action-list-summary actionType="Goal" [actionList]="goals()"></action-list-summary>
+    </div>
     <div content-details>
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-        cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on
-        it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-        nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-        synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
+      <action-list-details actionType="Goal" [actionList]="goals()"></action-list-details>
+    </div>
+  </summary-detail-card>
+  <summary-detail-card title="Committed Actions" [small]="true">
+    <div content-summary>
+      <action-list-summary actionType="Commitment" [actionList]="goals()"></action-list-summary>
+    </div>
+    <div content-details>
+      <action-list-details actionType="Commitment" [actionList]="goals()"></action-list-details>
+    </div>
+  </summary-detail-card>
+  <summary-detail-card title="1:1 Meetings" [small]="true">
+    <div content-summary>
+      <notes-list-summary noteType="1:1" [noteList]="notes()" [requiredCadence]="90"></notes-list-summary>
+    </div>
+    <div content-details>
+      <notes-list-details noteType="1:1" [noteList]="notes()"></notes-list-details>
     </div>
   </summary-detail-card>
 </form>

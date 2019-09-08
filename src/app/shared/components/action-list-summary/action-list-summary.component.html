@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-3">
+    <div>
+      <span style="font-weight: bold">Next {{ actionType }} Due:</span>
+    </div>
+    {{ nextActionDate | date: 'shortDate' }}
+  </div>
+  <div class="col-3">
+    <div>
+      <span style="font-weight: bold">Last Completed {{ actionType }}:</span>
+    </div>
+    {{ lastActionDate | date: 'shortDate' }}
+  </div>
+  <div class="col-3">
+    <div>
+      <span style="font-weight: bold">Total Upcoming {{ actionType }}(s):</span>
+    </div>
+    {{ totalUpcomingActions }}
+  </div>
+  <div class="col-3">
+    <div>
+      <span style="font-weight: bold">Total Completed {{ actionType }}(s):</span>
+    </div>
+    {{ totalCompletedActions }}
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-3">
+    <div>
+      <span style="font-weight: bold">Last {{ noteType }} Date:</span>
+    </div>
+    {{ lastNoteDate | date: 'shortDate' }}
+  </div>
+  <div class="col-3">
+    <div>
+      <span style="font-weight: bold">Required Cadence (days):</span>
+    </div>
+    {{ requiredCadence | dashesWhenNull }}
+  </div>
+  <div class="col-3">
+    <div>
+      <span style="font-weight: bold">Total {{ noteType }}(s):</span>
+    </div>
+    {{ totalNotes }}
+  </div>
+</div>
