@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Action, ActionType } from '../../../core/models/action.model';
 
 @Component({
@@ -31,6 +31,7 @@ export class ActionListDetailsComponent {
   }
   @Input() actionType: string;
   @Input() actionTypeFilter: ActionType;
+  @Output() saveEvent: EventEmitter<null> = new EventEmitter();
 
   private _actionList: Action[] = [];
 
@@ -81,10 +82,12 @@ export class ActionListDetailsComponent {
 
   deleteAction(action: Action) {
     this._actionList.splice(this._actionList.indexOf(action), 1);
+    this.saveEvent.emit();
   }
 
   setActionAbandoned(action: Action, abandoned: boolean) {
     action.abandoned = abandoned;
+    this.saveEvent.emit();
   }
 
   setActionCompleted(action: Action, completed: boolean) {
@@ -94,5 +97,10 @@ export class ActionListDetailsComponent {
     } else {
       action.completedOn = null;
     }
+    this.saveEvent.emit();
+  }
+
+  saveChanges() {
+    this.saveEvent.emit();
   }
 }

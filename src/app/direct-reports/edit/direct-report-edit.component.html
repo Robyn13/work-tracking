@@ -77,6 +77,7 @@
           [actionType]="actionConfig.detailDescription"
           [actionTypeFilter]="actionConfig.filterType"
           [actionList]="directReport.actionItems"
+          (saveEvent)="saveAllChanges()"
         ></action-list-details>
       </div>
     </summary-detail-card>
@@ -97,6 +98,7 @@
           [noteType]="noteConfig.detailDescription"
           [noteTypeFilter]="noteConfig.filterType"
           [noteList]="directReport.notes"
+          (saveEvent)="saveAllChanges()"
         ></notes-list-details>
       </div>
     </summary-detail-card>
@@ -117,6 +119,7 @@
           [infoType]="infoConfig.detailDescription"
           [infoTypeFilter]="infoConfig.filterType"
           [infoList]="directReport.extraInfo"
+          (saveEvent)="saveAllChanges()"
         ></info-list-details>
       </div>
     </summary-detail-card>

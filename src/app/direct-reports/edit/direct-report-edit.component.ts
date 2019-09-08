@@ -17,39 +17,6 @@ export class DirectReportEditComponent {
   noteConfigs = noteConfigs;
   infoConfigs = infoConfigs;
 
-  info = [
-    <Info>{
-      summaryItem: true,
-      description: 'shirt size',
-      type: InfoType.Extra,
-      info: 'small',
-    },
-    <Info>{
-      summaryItem: false,
-      description: 'comment',
-      type: InfoType.Extra,
-      info: 'didn not like vegas',
-    },
-    <Info>{
-      summaryItem: true,
-      description: 'random thought',
-      type: InfoType.Extra,
-      info: 'wants to be an astronaught',
-    },
-    <Info>{
-      summaryItem: true,
-      description: 'Wife',
-      type: InfoType.Family,
-      info: 'Wendy',
-    },
-    <Info>{
-      summaryItem: false,
-      description: 'aunt',
-      type: InfoType.Family,
-      info: 'hilda',
-    },
-  ];
-
   saveAllChanges() {
     this.saveChangesEvent.emit(this.directReport);
   }

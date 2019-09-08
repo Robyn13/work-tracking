@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Note, NoteType } from '../../../core/models/note.model';
 
 @Component({
@@ -26,6 +26,7 @@ export class NotesListDetailsComponent {
   }
   @Input() noteType: string;
   @Input() noteTypeFilter: NoteType;
+  @Output() saveEvent: EventEmitter<null> = new EventEmitter();
 
   private _noteList: Note[] = [];
 
@@ -61,5 +62,10 @@ export class NotesListDetailsComponent {
 
   deleteNote(note: Note) {
     this._noteList.splice(this._noteList.indexOf(note), 1);
+    this.saveEvent.emit();
+  }
+
+  saveChanges() {
+    this.saveEvent.emit();
   }
 }

@@ -52,8 +52,8 @@ employeeRoutes.route("/update/:id").post(function(req, res) {
       employee.commuteTime = req.body.commuteTime;
       employee.currentClient = req.body.currentClient;
       employee.currentAddress = req.body.currentAddress;
-      employee.goals = req.body.goals;
-      employee.info = req.body.info;
+      employee.extraInfo = req.body.extraInfo;
+      employee.notes = req.body.notes;
       employee.actionItems = req.body.actionItems;
 
       employee

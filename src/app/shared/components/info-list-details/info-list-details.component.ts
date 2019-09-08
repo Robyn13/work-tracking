@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Info, InfoType } from '../../../core/models/info.model';
 
 @Component({
@@ -23,6 +23,7 @@ export class InfoListDetailsComponent {
   }
   @Input() infoTypeFilter: InfoType;
   @Input() infoType: string;
+  @Output() saveEvent: EventEmitter<null> = new EventEmitter();
 
   private _infoList: Info[] = [];
   constructor() {}
@@ -35,7 +36,7 @@ export class InfoListDetailsComponent {
     if (!date) {
       return null;
     }
-    return date.toISOString().substring(0, 10);
+    return new Date(date).toISOString().substring(0, 10);
   }
 
   getUpdatedDate(dateFromPicker: any) {
@@ -57,5 +58,10 @@ export class InfoListDetailsComponent {
 
   deleteInfoItem(item: Info) {
     this._infoList.splice(this._infoList.indexOf(item), 1);
+    this.saveEvent.emit();
+  }
+
+  saveChanges() {
+    this.saveEvent.emit();
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Note, NoteType } from '../../../core/models/note.model';
+import { Note, NoteType, isNextNoteOverdue, isNextNoteDueInTheNextWeek, lastNoteDate } from '../../../core/models/note.model';
 
 @Component({
   selector: 'notes-list-summary',
@@ -28,38 +28,14 @@ export class NotesListSummaryComponent {
   }
 
   get lastNoteDate() {
-    const lastNote = this.noteList
-      .filter(x => x.date)
-      .sort((a, b) => {
-        return b.date.valueOf() - a.date.valueOf();
-      })
-      .shift();
-
-    if (lastNote) {
-      return lastNote.date;
-    }
-    return null;
+    return lastNoteDate(this.noteList);
   }
 
   get isNextNoteOverdue() {
-    if (!this.requiredCadence) {
-      return false;
-    }
-    const lastNoteDate = this.lastNoteDate;
-    if (!this.lastNoteDate) {
-      return true;
-    }
-    return new Date(lastNoteDate).valueOf() + this.requiredCadence * 24 * 60 * 60 * 1000 < new Date().valueOf();
+    return isNextNoteOverdue(this.lastNoteDate, this.requiredCadence);
   }
 
   get isNextNoteDueInTheNextWeek() {
-    if (!this.requiredCadence) {
-      return false;
-    }
-    const lastNoteDate = this.lastNoteDate;
-    if (!this.lastNoteDate) {
-      return false;
-    }
-    return new Date(lastNoteDate).valueOf() + (this.requiredCadence - 7) * 24 * 60 * 60 * 1000 < new Date().valueOf();
+    return isNextNoteDueInTheNextWeek(this.lastNoteDate, this.requiredCadence);
   }
 }

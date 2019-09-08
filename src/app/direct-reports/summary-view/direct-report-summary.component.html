@@ -16,15 +16,35 @@
     {{ directReport.reportsTo | dashesWhenNull }}
   </div>
   <div class="col-3">
-    <div><span style="font-weight: bold" class="text-warning">Last 1:1 Date:</span></div>
-    {{ directReport.lastOneOnOneDate | date: 'shortDate' | dashesWhenNull }}
+    <div>
+      <span style="font-weight: bold" [ngClass]="{ 'text-danger': isOneOnOneOverdue, 'text-warning': isOneOnOneAWeekFromOverdue }"
+        >Last 1:1 Date:</span
+      >
+    </div>
+    {{ lastOneOnOneDate | date: 'shortDate' | dashesWhenNull }}
   </div>
   <div class="col-3">
-    <div><span style="font-weight: bold" class="text-success">Last QR Date:</span></div>
-    {{ directReport.lastQuickReviewDate | date: 'shortDate' | dashesWhenNull }}
+    <div>
+      <span style="font-weight: bold" [ngClass]="{ 'text-danger': isQuickReviewOverdue, 'text-warning': isQuickReviewAWeekFromOverdue }"
+        >Last QR Date:</span
+      >
+    </div>
+    {{ lastQuickReviewDate | date: 'shortDate' | dashesWhenNull }}
   </div>
   <div class="col-3">
-    <div><span style="font-weight: bold" class="text-success">Next Commitment Due:</span></div>
-    {{ directReport.nextCommitmentDueDate | date: 'shortDate' | dashesWhenNull }}
+    <div>
+      <span style="font-weight: bold" [ngClass]="{ 'text-danger': isGoalBeingMissed, 'text-warning': isGoalOneWeekFromMissed }"
+        >Next Goal Due:</span
+      >
+    </div>
+    {{ nextGoalDueDate | date: 'shortDate' | dashesWhenNull }}
+  </div>
+  <div class="col-3">
+    <div>
+      <span style="font-weight: bold" [ngClass]="{ 'text-danger': isCommitmentBeingMissed, 'text-warning': isCommitmentOneWeekFromMissed }"
+        >Next Commitment Due:</span
+      >
+    </div>
+    {{ nextCommitmentDueDate | date: 'shortDate' | dashesWhenNull }}
   </div>
 </div>

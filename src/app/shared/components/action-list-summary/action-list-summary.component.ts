@@ -1,6 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Action } from '../../../core/models/action.model';
-import { createHostListener } from '@angular/compiler/src/core';
+import { Component, Input } from '@angular/core';
+import {
+  Action,
+  getNextActionIsInTheNextWeek,
+  getNextActionDateIsBehind,
+  getNextActionDate,
+  getTopActionDate,
+  getUpComingActionList,
+} from '../../../core/models/action.model';
 
 @Component({
   selector: 'action-list-summary',
@@ -30,7 +36,7 @@ export class ActionListSummaryComponent {
   }
 
   get upComingActionList() {
-    return this.actionList.filter(x => !x.completed);
+    return getUpComingActionList(this.actionList);
   }
 
   get totalCompletedActions() {
@@ -42,50 +48,18 @@ export class ActionListSummaryComponent {
   }
 
   get nextActionDateIsBehind() {
-    const nextActiveAction = this.getNextActiveAction();
-    if (!nextActiveAction) {
-      if (this.noNextActionIsError) {
-        return true;
-      }
-      return false;
-    }
-    return new Date(nextActiveAction) <= new Date();
+    return getNextActionDateIsBehind(this.nextActionDate, this.noNextActionIsError);
   }
 
   get nextActionIsInTheNextWeek() {
-    const nextActiveAction = this.getNextActiveAction();
-    if (!nextActiveAction) {
-      return false;
-    }
-    return new Date(nextActiveAction) <= new Date(new Date().valueOf() + 7 * 24 * 60 * 60 * 1000);
+    return getNextActionIsInTheNextWeek(this.nextActionDate);
   }
 
   get lastActionDate() {
-    return this.getTopActionDate(this.completedActionList, true);
+    return getTopActionDate(this.completedActionList, true);
   }
 
   get nextActionDate() {
-    return this.getTopActionDate(this.upComingActionList, false);
-  }
-
-  private getNextActiveAction() {
-    const incompletedActiveActions = this.actionList.filter(x => !x.completed);
-    return this.getTopActionDate(incompletedActiveActions, false);
-  }
-
-  private getTopActionDate(actionList: Action[], sortOrderAsc: boolean): Date {
-    if (!actionList) {
-      return null;
-    }
-
-    const ordredList = actionList
-      .filter(x => !x.abandoned)
-      .filter(x => x.date)
-      .sort((a, b) => (sortOrderAsc ? -1 : 1) * (a.date.valueOf() - b.date.valueOf()));
-
-    if (ordredList.length === 0) {
-      return null;
-    }
-    return ordredList.shift().date;
+    return getNextActionDate(this.actionList);
   }
 }
