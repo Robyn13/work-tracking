@@ -1,7 +1,7 @@
-export interface SummaryDetailCardBaseData<T extends SummaryDetailCardDetailItem<U>, U> {
-  detailList: T[];
-  filterType: U;
-  setDetailListByType(detailList: T[], filterType: U): void;
+export enum SummaryDetailCardType {
+  Action = 'action',
+  Meeting = 'meeting',
+  Info = 'info',
 }
 
 export interface SummaryDetailCardSummaryData {
@@ -12,20 +12,28 @@ export interface SummaryDetailCardDetailData {
   detailDescription: string;
 }
 
+export class SummaryDetailCard implements SummaryDetailCardSummaryData, SummaryDetailCardDetailData {
+  cardType: SummaryDetailCardType;
+  summaryDescription: string;
+  detailDescription: string;
+}
+
+export class SummaryDetailCardBaseData<T extends SummaryDetailCardDetailItem<U>, U> extends SummaryDetailCard {
+  detailList: T[];
+  filterType: U;
+  setDetailListByType = (detailList: T[], filterType: U) => {};
+}
+
 export class SummaryDetailCardDetailItem<T> {
   type: T;
   createdOn: Date;
 }
 
-export class SummaryDetailCardData<T extends SummaryDetailCardDetailItem<U>, U, V>
-  implements SummaryDetailCardBaseData<T, U>, SummaryDetailCardSummaryData, SummaryDetailCardDetailData {
-  summaryDescription: string;
-  detailDescription: string;
-  filterType: U;
-
+export class SummaryDetailCardData<T extends SummaryDetailCardDetailItem<U>, U, V> extends SummaryDetailCardBaseData<T, U> {
   private _detailList: T[] = [];
 
   constructor(summaryDescription: string, detailDescription: string, filterType: U) {
+    super();
     this.summaryDescription = summaryDescription;
     this.detailDescription = detailDescription;
     this.filterType = filterType;

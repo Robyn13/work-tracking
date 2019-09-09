@@ -1,4 +1,4 @@
-import { SummaryDetailCardData, SummaryDetailCardDetailItem } from './summary-detail-card.model';
+import { SummaryDetailCardData, SummaryDetailCardDetailItem, SummaryDetailCardType } from './summary-detail-card.model';
 import { IInfo } from '../../core/services/interfaces/info.interface';
 
 export enum InfoType {
@@ -26,6 +26,7 @@ export class Info extends SummaryDetailCardDetailItem<InfoType> implements IInfo
 export class InfoSummaryDetailCardData extends SummaryDetailCardData<Info, InfoType, IInfo> {
   constructor(summaryDescription: string, detailDescription: string, filterType: InfoType) {
     super(summaryDescription, detailDescription, filterType);
+    this.cardType = SummaryDetailCardType.Info;
   }
 
   detailListSort(a: Info, b: Info) {

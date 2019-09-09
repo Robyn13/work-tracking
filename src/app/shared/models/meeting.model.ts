@@ -1,4 +1,4 @@
-import { SummaryDetailCardData, SummaryDetailCardDetailItem } from './summary-detail-card.model';
+import { SummaryDetailCardData, SummaryDetailCardDetailItem, SummaryDetailCardType } from './summary-detail-card.model';
 import { IMeeting } from '../../core/services/interfaces/meeting.interface';
 
 export enum MeetingType {
@@ -27,6 +27,7 @@ export class MeetingSummaryDetailCardData extends SummaryDetailCardData<Meeting,
   constructor(summaryDescription: string, detailDescription: string, filterType: MeetingType, minimumRequiredCadence: number) {
     super(summaryDescription, detailDescription, filterType);
     this.minimumRequiredCadence = minimumRequiredCadence;
+    this.cardType = SummaryDetailCardType.Meeting;
   }
 
   detailListSort(a: Meeting, b: Meeting) {

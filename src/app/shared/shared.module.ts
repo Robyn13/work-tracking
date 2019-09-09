@@ -10,6 +10,7 @@ import { MeetingListDetailsComponent } from './components/meeting-list-details/m
 import { MeetingListSummaryComponent } from './components/meeting-list-summary/meeting-list-summary.component';
 import { InfoListDetailsComponent } from './components/info-list-details/info-list-details.component';
 import { InfoListSummaryComponent } from './components/info-list-summary/info-list-summary.component';
+import { SummaryDetailSelectorComponent } from './components/summary-detail-selector/summary-detail-selector.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { InfoListSummaryComponent } from './components/info-list-summary/info-li
     MeetingListSummaryComponent,
     InfoListDetailsComponent,
     InfoListSummaryComponent,
+    SummaryDetailSelectorComponent,
   ],
   imports: [CommonModule, FormsModule, NgbModule],
   exports: [
@@ -34,6 +36,7 @@ import { InfoListSummaryComponent } from './components/info-list-summary/info-li
     MeetingListSummaryComponent,
     InfoListDetailsComponent,
     InfoListSummaryComponent,
+    SummaryDetailSelectorComponent,
   ],
   providers: [],
 })

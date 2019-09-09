@@ -10,28 +10,15 @@ export class DirectReportEditComponent {
   @Input() directReport: DirectReport;
   @Output() saveChangesEvent: EventEmitter<DirectReport> = new EventEmitter();
 
-  get careerPathActions() {
-    return this.directReport.careerPathActions;
-  }
-
-  get committedActions() {
-    return this.directReport.committedActions;
-  }
-
-  get oneOnOneMeetings() {
-    return this.directReport.oneOnOneMeetings;
-  }
-
-  get quickReviewMeetings() {
-    return this.directReport.quickReviews;
-  }
-
-  get familyInfo() {
-    return this.directReport.familyInfo;
-  }
-
-  get additionalInfo() {
-    return this.directReport.additionalInfo;
+  get allSummaryDetailCards() {
+    return [
+      this.directReport.careerPathActions,
+      this.directReport.committedActions,
+      this.directReport.oneOnOneMeetings,
+      this.directReport.quickReviews,
+      this.directReport.familyInfo,
+      this.directReport.additionalInfo,
+    ];
   }
 
   constructor() {}

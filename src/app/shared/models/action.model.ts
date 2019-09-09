@@ -1,4 +1,4 @@
-import { SummaryDetailCardData, SummaryDetailCardDetailItem } from './summary-detail-card.model';
+import { SummaryDetailCardData, SummaryDetailCardDetailItem, SummaryDetailCardType } from './summary-detail-card.model';
 import { IAction } from '../../core/services/interfaces/action.interface';
 
 export enum ActionType {
@@ -33,6 +33,7 @@ export class ActionSummaryDetailCardData extends SummaryDetailCardData<Action, A
   constructor(summaryDescription: string, detailDescription: string, filterType: ActionType, noNextActionIsError: boolean) {
     super(summaryDescription, detailDescription, filterType);
     this.noNextActionIsError = noNextActionIsError;
+    this.cardType = SummaryDetailCardType.Action;
   }
 
   detailListSort = (a: Action, b: Action) => {

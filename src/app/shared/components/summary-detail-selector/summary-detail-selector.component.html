@@ -1,0 +1,22 @@
+<span [ngSwitch]="cardType">
+  <summary-detail-card [title]="title" [small]="true">
+    <div content-summary>
+      <action-list-summary *ngSwitchCase="cardTypeAction" [summaryDetails]="summaryDetails"></action-list-summary>
+      <meeting-list-summary *ngSwitchCase="cardTypeMeeting" [summaryDetails]="summaryDetails"></meeting-list-summary>
+      <info-list-summary *ngSwitchCase="cardTypeInfo" [summaryDetails]="summaryDetails"> </info-list-summary>
+    </div>
+    <div content-details>
+      <action-list-details
+        *ngSwitchCase="cardTypeAction"
+        [summaryDetails]="summaryDetails"
+        (saveEvent)="saveChanges()"
+      ></action-list-details>
+      <meeting-list-details
+        *ngSwitchCase="cardTypeMeeting"
+        [summaryDetails]="summaryDetails"
+        (saveEvent)="saveChanges()"
+      ></meeting-list-details>
+      <info-list-details *ngSwitchCase="cardTypeInfo" [summaryDetails]="summaryDetails" (saveEvent)="saveChanges()"></info-list-details>
+    </div>
+  </summary-detail-card>
+</span>
