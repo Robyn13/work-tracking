@@ -2,16 +2,16 @@
   <div class="card-header collapsable-element-header" (click)="toggleCollapse()">
     <div class="row">
       <div class="col align-self-start">
-        <h5 *ngIf="!small" class="title mb-1">{{ title }}</h5>
-        <h6 *ngIf="small" class="title mb-1">{{ title }}</h6>
-      </div>
-      <div class="col align-self-end">
-        <a class="float-right mb-1" *ngIf="collapsed"
-          ><i class="fa fa-eye non-btn-action non-btn-primary" [ngClass]="{ 'fa-2x': !small, 'fa-lg': small }"></i>
-        </a>
-        <a class="float-right mb-1" *ngIf="!collapsed"
-          ><i class="fa fa-eye-slash non-btn-action non-btn-primary" [ngClass]="{ 'fa-2x': !small, 'fa-lg': small }"></i>
-        </a>
+        <h5 *ngIf="!small" class="title mb-1 non-btn-primary">
+          <a class="mb-1"><i class="fa non-btn-action" [ngClass]="{ 'fa-eye': collapsed, 'fa-eye-slash': !collapsed }"></i> </a>
+          {{ title }}
+        </h5>
+        <h6 *ngIf="small" class="title mb-1  non-btn-primary">
+          <a class="mb-1"
+            ><i class="fa non-btn-action non-btn-primary" [ngClass]="{ 'fa-eye': collapsed, 'fa-eye-slash': !collapsed }"></i>
+          </a>
+          {{ title }}
+        </h6>
       </div>
     </div>
   </div>

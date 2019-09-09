@@ -9,6 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build-prod": "ng build --prod",
+    "test-ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessNoSandbox",
+    "e2e-ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "private": true,
@@ -72,6 +75,7 @@
     "prettier": "^1.17.0",
     "pretty-quick": "^1.10.0",
     "protractor": "5.4.2",
+    "puppeteer": "^1.19.0",
     "ts-node": "8.0.2",
     "tslint": "5.12.1",
     "typescript": "3.2.4"
