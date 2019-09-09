@@ -6,8 +6,8 @@ import { ActionListSummaryComponent } from './components/action-list-summary/act
 import { ActionListDetailsComponent } from './components/action-list-details/action-list-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashesWhenNullPipe } from './pipes/dashes-when-null.pipe';
-import { NotesListDetailsComponent } from './components/notes-list-details/notes-list-details.component';
-import { NotesListSummaryComponent } from './components/notes-list-summary/notes-list-summary.component';
+import { MeetingListDetailsComponent } from './components/meeting-list-details/meeting-list-details.component';
+import { MeetingListSummaryComponent } from './components/meeting-list-summary/meeting-list-summary.component';
 import { InfoListDetailsComponent } from './components/info-list-details/info-list-details.component';
 import { InfoListSummaryComponent } from './components/info-list-summary/info-list-summary.component';
 
@@ -17,8 +17,8 @@ import { InfoListSummaryComponent } from './components/info-list-summary/info-li
     ActionListSummaryComponent,
     ActionListDetailsComponent,
     DashesWhenNullPipe,
-    NotesListDetailsComponent,
-    NotesListSummaryComponent,
+    MeetingListDetailsComponent,
+    MeetingListSummaryComponent,
     InfoListDetailsComponent,
     InfoListSummaryComponent,
   ],
@@ -30,8 +30,8 @@ import { InfoListSummaryComponent } from './components/info-list-summary/info-li
     ActionListSummaryComponent,
     ActionListDetailsComponent,
     DashesWhenNullPipe,
-    NotesListDetailsComponent,
-    NotesListSummaryComponent,
+    MeetingListDetailsComponent,
+    MeetingListSummaryComponent,
     InfoListDetailsComponent,
     InfoListSummaryComponent,
   ],

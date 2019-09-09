@@ -1,0 +1,47 @@
+<div class="row pb-3">
+  <div class="col-md-3 pl-1">
+    <div class="non-btn-action non-btn-success pb-1" (click)="addNewDetailItem()">
+      <i class="fa fa-plus"> Add New {{ detailDescription }} </i>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let meeting of meetingList">
+  <div class="row">
+    <hr width="100%" />
+    <div class="col-md-3 pl-1">
+      <div class="non-btn-action non-btn-danger pb-3" (click)="deleteDetailItem(meeting)">
+        <i class="fa fa-minus"> Delete {{ detailDescription }} </i>
+      </div>
+      <div class="non-btn-action non-btn-success pb-1" (click)="saveChanges()">
+        <i class="fa fa-floppy-o"> Save Changes</i>
+      </div>
+    </div>
+    <div class="col-md-3 pl-1">
+      <div class="form-group">
+        <label>{{ detailDescription }} Date</label>
+        <input
+          type="date"
+          class="form-control"
+          name="date"
+          [value]="getFormattedDate(meeting.date)"
+          (change)="meeting.date = getUpdatedDate($event)"
+        />
+      </div>
+    </div>
+    <div class="col-md-3 pl-1">
+      <div class="form-group">
+        <label>Created On</label>
+        <input type="date" class="form-control" name="createdOn" [value]="getFormattedDate(meeting.createdOn)" disabled />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>{{ detailDescription }} Notes</label>
+        <textarea rows="6" cols="80" class="form-control" name="note" [(ngModel)]="meeting.note"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

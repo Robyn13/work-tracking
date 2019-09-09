@@ -29,7 +29,7 @@ let Employee = new Schema(
     currentAddress: {
       type: String
     },
-    notes: {
+    meetings: {
       type: Array
     },
     extraInfo: {

@@ -1,65 +1,42 @@
-import { Component, Input } from '@angular/core';
-import {
-  Action,
-  getNextActionIsInTheNextWeek,
-  getNextActionDateIsBehind,
-  getNextActionDate,
-  getTopActionDate,
-  getUpComingActionList,
-} from '../../../core/models/action.model';
+import { Component } from '@angular/core';
+import { SummaryDetailSummaryComponent } from '../../models/summary-detail-component.model';
+import { ActionSummaryDetailCardData, Action, ActionType } from '../../models/action.model';
+import { IAction } from '../../../core/services/interfaces/action.interface';
 
 @Component({
   selector: 'action-list-summary',
   templateUrl: './action-list-summary.component.html',
 })
-export class ActionListSummaryComponent {
-  @Input() set actionList(value: Action[]) {
-    this._actionList = value;
-  }
-  @Input() actionType: string;
-  @Input() actionTypeFilter: string;
-  @Input() noNextActionIsError: boolean;
-
-  private _actionList: Action[];
-
-  constructor() {}
-
-  get actionList() {
-    if (!this._actionList) {
-      return [];
-    }
-    return this._actionList.filter(x => x.type === this.actionTypeFilter);
-  }
-
-  get completedActionList() {
-    return this.actionList.filter(x => x.completed);
-  }
-
-  get upComingActionList() {
-    return getUpComingActionList(this.actionList);
+export class ActionListSummaryComponent extends SummaryDetailSummaryComponent<ActionSummaryDetailCardData, Action, ActionType, IAction> {
+  get detailDescription() {
+    return this.summaryDetails.detailDescription;
   }
 
   get totalCompletedActions() {
-    return this.completedActionList.length;
+    return this.summaryDetails.completedActionList.length;
   }
 
   get totalUpComingActions() {
-    return this.upComingActionList.length;
+    return this.summaryDetails.upComingActionList.length;
   }
 
   get nextActionDateIsBehind() {
-    return getNextActionDateIsBehind(this.nextActionDate, this.noNextActionIsError);
+    return this.summaryDetails.nextActionDateIsBehind;
   }
 
   get nextActionIsInTheNextWeek() {
-    return getNextActionIsInTheNextWeek(this.nextActionDate);
+    return this.summaryDetails.nextActionIsInTheNextWeek;
   }
 
   get lastActionDate() {
-    return getTopActionDate(this.completedActionList, true);
+    return this.summaryDetails.lastActionDate;
   }
 
   get nextActionDate() {
-    return getNextActionDate(this.actionList);
+    return this.summaryDetails.nextActionDate;
+  }
+
+  constructor() {
+    super();
   }
 }

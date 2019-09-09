@@ -1,12 +1,5 @@
 import { Input, Component } from '@angular/core';
 import { DirectReport } from '../direct-reports.model';
-import { NoteType, lastNoteDateByType, isNextNoteOverdue, isNextNoteDueInTheNextWeek } from '../../core/models/note.model';
-import {
-  ActionType,
-  getNextActionDateByType,
-  getNextActionDateIsBehind,
-  getNextActionIsInTheNextWeek,
-} from '../../core/models/action.model';
 
 @Component({
   selector: 'direct-report-summary',
@@ -18,50 +11,50 @@ export class DirectReportSummaryComponent {
   constructor() {}
 
   get lastOneOnOneDate() {
-    return lastNoteDateByType(this.directReport.notes, NoteType.OneOnOne);
+    return this.directReport.oneOnOneMeetings.lastMeetingDate;
   }
 
   get isOneOnOneOverdue() {
-    return isNextNoteOverdue(this.lastOneOnOneDate, 90);
+    return this.directReport.oneOnOneMeetings.isNextMeetingOverdue;
   }
 
   get isOneOnOneAWeekFromOverdue() {
-    return isNextNoteDueInTheNextWeek(this.lastOneOnOneDate, 90);
+    return this.directReport.oneOnOneMeetings.isNextMeetingDueInTheNextWeek;
   }
 
   get lastQuickReviewDate() {
-    return lastNoteDateByType(this.directReport.notes, NoteType.QuickReview);
+    return this.directReport.quickReviews.lastMeetingDate;
   }
 
   get isQuickReviewOverdue() {
-    return isNextNoteOverdue(this.lastQuickReviewDate, 180);
+    return this.directReport.quickReviews.isNextMeetingOverdue;
   }
 
   get isQuickReviewAWeekFromOverdue() {
-    return isNextNoteDueInTheNextWeek(this.lastQuickReviewDate, 180);
+    return this.directReport.quickReviews.isNextMeetingDueInTheNextWeek;
   }
 
   get nextGoalDueDate() {
-    return getNextActionDateByType(this.directReport.actionItems, ActionType.Goal);
+    return this.directReport.careerPathActions.nextActionDate;
   }
 
   get isGoalBeingMissed() {
-    return getNextActionDateIsBehind(this.nextGoalDueDate, true);
+    return this.directReport.careerPathActions.nextActionDateIsBehind;
   }
 
   get isGoalOneWeekFromMissed() {
-    return getNextActionIsInTheNextWeek(this.nextGoalDueDate);
+    return this.directReport.careerPathActions.nextActionIsInTheNextWeek;
   }
 
   get nextCommitmentDueDate() {
-    return getNextActionDateByType(this.directReport.actionItems, ActionType.Commitment);
+    return this.directReport.committedActions.nextActionDate;
   }
 
   get isCommitmentBeingMissed() {
-    return getNextActionDateIsBehind(this.nextCommitmentDueDate, false);
+    return this.directReport.committedActions.nextActionDateIsBehind;
   }
 
   get isCommitmentOneWeekFromMissed() {
-    return getNextActionIsInTheNextWeek(this.nextCommitmentDueDate);
+    return this.directReport.committedActions.nextActionIsInTheNextWeek;
   }
 }

@@ -2,8 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EmployeeService } from '../core/services/employee.service';
 import { Subscription, Observable } from 'rxjs';
 import { DirectReport } from './direct-reports.model';
-import { DirectReportEditComponent } from './edit/direct-report-edit.component';
-import { Employee } from '../core/models/employee.model';
+import { IEmployee } from '../core/services/interfaces/employee.interface';
 
 @Component({
   selector: 'direct-reports',
@@ -28,7 +27,11 @@ export class DirectReportsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.employeeService.getAllEmployees().subscribe(result => {
         this.directReports = result
-          .map(x => new DirectReport().copyEmployee(x))
+          .map(x => {
+            const directReport = new DirectReport();
+            directReport.copyEmployee(x);
+            return directReport;
+          })
           .sort((a, b) => {
             if (a.name && !b.name) {
               return 1;
@@ -49,16 +52,17 @@ export class DirectReportsComponent implements OnInit, OnDestroy {
   }
 
   addDirectReport() {
-    const newReport = new DirectReport().createNewDirectReport();
+    const newReport = new DirectReport();
+    newReport.setAsNew();
     this.directReports.unshift(newReport);
   }
 
   saveDirectReport(value: DirectReport) {
-    let serviceCall: Observable<Employee>;
+    let serviceCall: Observable<IEmployee>;
     if (value.isInsert) {
-      serviceCall = this.employeeService.insertNewEmployee(value);
+      serviceCall = this.employeeService.insertNewEmployee(value.employee);
     } else {
-      serviceCall = this.employeeService.updateEmployee(value);
+      serviceCall = this.employeeService.updateEmployee(value.employee);
     }
 
     this.subscriptions.add(

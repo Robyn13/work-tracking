@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { appRoutes, RouteConfig } from '../../core/models/routing-info.model';
+import { RouteConfig, appRoutes } from '../../shared/models/routing-info.model';
 
 @Component({
   selector: 'app-left-navigation',

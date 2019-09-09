@@ -1,7 +1,7 @@
 <div class="row pb-3">
   <div class="col-md-3 pl-1">
-    <div class="non-btn-action non-btn-success pb-1" (click)="addNewInfoItem()">
-      <i class="fa fa-plus"> Add New {{ infoType }} Item </i>
+    <div class="non-btn-action non-btn-success pb-1" (click)="addNewDetailItem()">
+      <i class="fa fa-plus"> Add New {{ detailDescripion }} Item </i>
     </div>
   </div>
 </div>
@@ -10,8 +10,8 @@
   <div class="row">
     <hr width="100%" />
     <div class="col-md-3 pl-1">
-      <div class="non-btn-action non-btn-danger pb-3" (click)="deleteInfoItem(info)">
-        <i class="fa fa-minus"> Delete {{ infoType }} Item </i>
+      <div class="non-btn-action non-btn-danger pb-3" (click)="deleteDetailItem(info)">
+        <i class="fa fa-minus"> Delete {{ detailDescripion }} Item </i>
       </div>
       <div class="non-btn-action non-btn-success pb-3" (click)="saveChanges()">
         <i class="fa fa-floppy-o"> Save Changes</i>

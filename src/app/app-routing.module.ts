@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RoutePath } from './core/models/routing-info.model';
+import { RoutePath } from './shared/models/routing-info.model';
 
 const routes: Routes = [
   {

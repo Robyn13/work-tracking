@@ -2,9 +2,11 @@
   <table class="table">
     <thead class="text-primary">
       <th>
-        <div class="non-btn-action non-btn-primary" (click)="addNewAction()"><i class="fa fa-plus"></i> Add New {{ actionType }}</div>
+        <div class="non-btn-action non-btn-primary" (click)="addNewDetailItem()">
+          <i class="fa fa-plus"></i> Add New {{ detailDescription }}
+        </div>
       </th>
-      <th>{{ actionType }}</th>
+      <th>{{ detailDescription }}</th>
       <th>Due Date</th>
       <th>Created on</th>
       <th>Completed?</th>
@@ -13,22 +15,22 @@
     <tbody>
       <tr *ngFor="let action of actionList">
         <td>
-          <div *ngIf="!action.completed" class="non-btn-action non-btn-danger pb-1" (click)="deleteAction(action)">
-            <i class="fa fa-minus"> Delete {{ actionType }}</i>
+          <div *ngIf="!action.completed" class="non-btn-action non-btn-danger pb-1" (click)="deleteDetailItem(action)">
+            <i class="fa fa-minus"> Delete {{ detailDescription }}</i>
           </div>
           <div
             *ngIf="!action.completed && !action.abandoned"
             class="non-btn-action non-btn-warning pb-1"
             (click)="setActionAbandoned(action, true)"
           >
-            <i class="fa fa-ban"> Abandon {{ actionType }}</i>
+            <i class="fa fa-ban"> Abandon {{ detailDescription }}</i>
           </div>
           <div
             *ngIf="!action.completed && action.abandoned"
             class="non-btn-action non-btn-primary pb-1"
             (click)="setActionAbandoned(action, false)"
           >
-            <i class="fa fa-undo"> Undo Abandon {{ actionType }}</i>
+            <i class="fa fa-undo"> Undo Abandon {{ detailDescription }}</i>
           </div>
           <div *ngIf="!action.completed && !action.abandoned" class="non-btn-action non-btn-success" (click)="saveChanges()">
             <i class="fa fa-floppy-o"> Save Changes</i>

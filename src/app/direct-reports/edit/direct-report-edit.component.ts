@@ -1,21 +1,44 @@
 import { Input, Component, Output, EventEmitter } from '@angular/core';
 import { DirectReport } from '../direct-reports.model';
-import { Action, ActionType, actionConfigs } from '../../core/models/action.model';
-import { Note, NoteType, noteConfigs } from '../../core/models/note.model';
-import { Info, InfoType, infoConfigs } from '../../core/models/info.model';
+import { SummaryDetailCardSummaryData } from '../../shared/models/summary-detail-card.model';
 
 @Component({
   selector: 'direct-report-edit',
   templateUrl: './direct-report-edit.component.html',
 })
 export class DirectReportEditComponent {
-  constructor() {}
   @Input() directReport: DirectReport;
   @Output() saveChangesEvent: EventEmitter<DirectReport> = new EventEmitter();
 
-  actionConfigs = actionConfigs;
-  noteConfigs = noteConfigs;
-  infoConfigs = infoConfigs;
+  get careerPathActions() {
+    return this.directReport.careerPathActions;
+  }
+
+  get committedActions() {
+    return this.directReport.committedActions;
+  }
+
+  get oneOnOneMeetings() {
+    return this.directReport.oneOnOneMeetings;
+  }
+
+  get quickReviewMeetings() {
+    return this.directReport.quickReviews;
+  }
+
+  get familyInfo() {
+    return this.directReport.familyInfo;
+  }
+
+  get additionalInfo() {
+    return this.directReport.additionalInfo;
+  }
+
+  constructor() {}
+
+  getCardTitle(summaryItem: SummaryDetailCardSummaryData) {
+    return this.directReport.getCardTitle(summaryItem);
+  }
 
   saveAllChanges() {
     this.saveChangesEvent.emit(this.directReport);

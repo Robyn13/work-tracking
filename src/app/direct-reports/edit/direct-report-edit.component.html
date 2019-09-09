@@ -62,66 +62,58 @@
       <button class="btn btn-info pull-right" (click)="saveAllChanges()">Save All Changes</button>
     </div>
   </div>
-  <div *ngFor="let actionConfig of actionConfigs">
-    <summary-detail-card [title]="directReport.name + ' - ' + actionConfig.summaryDescription" [small]="true">
-      <div content-summary>
-        <action-list-summary
-          [actionType]="actionConfig.detailDescription"
-          [actionTypeFilter]="actionConfig.filterType"
-          [actionList]="directReport.actionItems"
-          [noNextActionIsError]="actionConfig.noNextActionIsError"
-        ></action-list-summary>
-      </div>
-      <div content-details>
-        <action-list-details
-          [actionType]="actionConfig.detailDescription"
-          [actionTypeFilter]="actionConfig.filterType"
-          [actionList]="directReport.actionItems"
-          (saveEvent)="saveAllChanges()"
-        ></action-list-details>
-      </div>
-    </summary-detail-card>
-  </div>
 
-  <div *ngFor="let noteConfig of noteConfigs">
-    <summary-detail-card [title]="directReport.name + ' - ' + noteConfig.summaryDescription" [small]="true">
-      <div content-summary>
-        <notes-list-summary
-          [noteType]="noteConfig.detailDescription"
-          [noteTypeFilter]="noteConfig.filterType"
-          [noteList]="directReport.notes"
-          [requiredCadence]="noteConfig.minimumRequiredCadence"
-        ></notes-list-summary>
-      </div>
-      <div content-details>
-        <notes-list-details
-          [noteType]="noteConfig.detailDescription"
-          [noteTypeFilter]="noteConfig.filterType"
-          [noteList]="directReport.notes"
-          (saveEvent)="saveAllChanges()"
-        ></notes-list-details>
-      </div>
-    </summary-detail-card>
-  </div>
+  <summary-detail-card [title]="getCardTitle(careerPathActions)" [small]="true">
+    <div content-summary>
+      <action-list-summary [summaryDetails]="careerPathActions"></action-list-summary>
+    </div>
+    <div content-details>
+      <action-list-details [summaryDetails]="careerPathActions" (saveEvent)="saveAllChanges()"></action-list-details>
+    </div>
+  </summary-detail-card>
 
-  <div *ngFor="let infoConfig of infoConfigs">
-    <summary-detail-card [title]="directReport.name + ' - ' + infoConfig.summaryDescription" [small]="true">
-      <div content-summary>
-        <info-list-summary
-          [infoType]="infoConfig.detailDescription"
-          [infoTypeFilter]="infoConfig.filterType"
-          [infoList]="directReport.extraInfo"
-        >
-        </info-list-summary>
-      </div>
-      <div content-details>
-        <info-list-details
-          [infoType]="infoConfig.detailDescription"
-          [infoTypeFilter]="infoConfig.filterType"
-          [infoList]="directReport.extraInfo"
-          (saveEvent)="saveAllChanges()"
-        ></info-list-details>
-      </div>
-    </summary-detail-card>
-  </div>
+  <summary-detail-card [title]="getCardTitle(committedActions)" [small]="true">
+    <div content-summary>
+      <action-list-summary [summaryDetails]="committedActions"></action-list-summary>
+    </div>
+    <div content-details>
+      <action-list-details [summaryDetails]="committedActions" (saveEvent)="saveAllChanges()"> </action-list-details>
+    </div>
+  </summary-detail-card>
+
+  <summary-detail-card [title]="getCardTitle(oneOnOneMeetings)" [small]="true">
+    <div content-summary>
+      <meeting-list-summary [summaryDetails]="oneOnOneMeetings"></meeting-list-summary>
+    </div>
+    <div content-details>
+      <meeting-list-details [summaryDetails]="oneOnOneMeetings" (saveEvent)="saveAllChanges()"></meeting-list-details>
+    </div>
+  </summary-detail-card>
+
+  <summary-detail-card [title]="getCardTitle(quickReviewMeetings)" [small]="true">
+    <div content-summary>
+      <meeting-list-summary [summaryDetails]="quickReviewMeetings"></meeting-list-summary>
+    </div>
+    <div content-details>
+      <meeting-list-details [summaryDetails]="quickReviewMeetings" (saveEvent)="saveAllChanges()"></meeting-list-details>
+    </div>
+  </summary-detail-card>
+
+  <summary-detail-card [title]="getCardTitle(familyInfo)" [small]="true">
+    <div content-summary>
+      <info-list-summary [summaryDetails]="familyInfo"> </info-list-summary>
+    </div>
+    <div content-details>
+      <info-list-details [summaryDetails]="familyInfo" (saveEvent)="saveAllChanges()"></info-list-details>
+    </div>
+  </summary-detail-card>
+
+  <summary-detail-card [title]="getCardTitle(additionalInfo)" [small]="true">
+    <div content-summary>
+      <info-list-summary [summaryDetails]="additionalInfo"> </info-list-summary>
+    </div>
+    <div content-details>
+      <info-list-details [summaryDetails]="additionalInfo" (saveEvent)="saveAllChanges()"></info-list-details>
+    </div>
+  </summary-detail-card>
 </form>

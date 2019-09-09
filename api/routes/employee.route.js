@@ -53,7 +53,7 @@ employeeRoutes.route("/update/:id").post(function(req, res) {
       employee.currentClient = req.body.currentClient;
       employee.currentAddress = req.body.currentAddress;
       employee.extraInfo = req.body.extraInfo;
-      employee.notes = req.body.notes;
+      employee.meetings = req.body.meetings;
       employee.actionItems = req.body.actionItems;
 
       employee

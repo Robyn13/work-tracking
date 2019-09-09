@@ -1,34 +1,18 @@
-import { Component, Input } from '@angular/core';
-import { Info, InfoType } from '../../../core/models/info.model';
+import { Component } from '@angular/core';
+import { SummaryDetailSummaryComponent } from '../../models/summary-detail-component.model';
+import { InfoSummaryDetailCardData, Info, InfoType } from '../../models/info.model';
+import { IInfo } from '../../../core/services/interfaces/info.interface';
 
 @Component({
   selector: 'info-list-summary',
   templateUrl: './info-list-summary.component.html',
 })
-export class InfoListSummaryComponent {
-  @Input() set infoList(value: Info[]) {
-    this._infoList = value;
-  }
-  @Input() infoTypeFilter: InfoType;
-  @Input() infoType: string;
-
-  private _infoList: Info[];
-  constructor() {}
-
+export class InfoListSummaryComponent extends SummaryDetailSummaryComponent<InfoSummaryDetailCardData, Info, InfoType, IInfo> {
   get infoList() {
-    if (!this._infoList) {
-      return [];
-    }
-    return this._infoList
-      .filter(x => x.type === this.infoTypeFilter && x.summaryItem)
-      .sort((a, b) => {
-        if (a.description > b.description) {
-          return 1;
-        }
-        if (a.description < b.description) {
-          return -1;
-        }
-        return 0;
-      });
+    return this.summaryDetails.orderedInfoSummaryItems;
+  }
+
+  constructor() {
+    super();
   }
 }

@@ -2,26 +2,26 @@
   <div class="col-3">
     <div>
       <span [ngClass]="{ 'text-danger': nextActionDateIsBehind, 'text-warning': nextActionIsInTheNextWeek }" style="font-weight: bold"
-        >Next {{ actionType }} Due:</span
+        >Next {{ detailDescription }} Due:</span
       >
     </div>
     {{ nextActionDate | date: 'shortDate' | dashesWhenNull }}
   </div>
   <div class="col-3">
     <div>
-      <span style="font-weight: bold">Last Completed {{ actionType }}:</span>
+      <span style="font-weight: bold">Last Completed {{ detailDescription }}:</span>
     </div>
     {{ lastActionDate | date: 'shortDate' | dashesWhenNull }}
   </div>
   <div class="col-3">
     <div>
-      <span style="font-weight: bold">Total Upcoming {{ actionType }}(s):</span>
+      <span style="font-weight: bold">Total Upcoming {{ detailDescription }}(s):</span>
     </div>
     {{ totalUpComingActions }}
   </div>
   <div class="col-3">
     <div>
-      <span style="font-weight: bold">Total Completed {{ actionType }}(s):</span>
+      <span style="font-weight: bold">Total Completed {{ detailDescription }}(s):</span>
     </div>
     {{ totalCompletedActions }}
   </div>
